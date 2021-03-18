@@ -3,6 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createSharedElementStackNavigator } from "react-navigation-shared-element";
 import { StackParams } from "./StackParams";
 import { Home, Main, MyCards } from "../screens";
+import { CardStyleInterpolators } from "@react-navigation/stack";
 
 const Stack = createSharedElementStackNavigator<StackParams>();
 
@@ -17,7 +18,10 @@ export const Navigation = (props: Props) => {
         <Stack.Screen
           name="MyCards"
           component={MyCards}
-          sharedElementsConfig={() => ["background"]}
+          options={{
+            cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+          }}
+          sharedElementsConfig={() => [{ id: "background", animation: "fade" }]}
         />
       </Stack.Navigator>
     </NavigationContainer>

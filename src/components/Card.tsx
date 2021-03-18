@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { SPACING, WHITE, width } from "../styles";
+import * as Animatable from "react-native-animatable";
 
 interface Props {
   color: string;
@@ -8,9 +9,27 @@ interface Props {
   balance: string;
 }
 
+const animation = {
+  0: {
+    transform: [
+      { scale: 0 },
+      { rotateX: "-80deg" },
+      { translateY: width * -0.55 },
+    ],
+  },  
+  0.8: { transform: [{ scale: 1.03 }, { rotateX: "20deg" }, { translateY: -10 }] },
+  1: { transform: [{ scale: 1 }, { rotateX: "0deg" }, { translateY: 0 }] },
+};
+
 export const Card = (props: Props) => {
   return (
-    <View style={[styles.view, { backgroundColor: props.color }]}>
+    <Animatable.View
+      useNativeDriver            
+      delay={300}
+      duration={2000}
+      animation={animation}
+      style={[styles.view, { backgroundColor: props.color }]}
+    >
       <View style={styles.meta}>
         <Text style={{ fontSize: 28, fontFamily: "Roboto_500Medium" }}>
           {`$ ${props.balance}`}
@@ -37,7 +56,7 @@ export const Card = (props: Props) => {
         <Text style={styles.number}>****</Text>
         <Text style={styles.number}>{`${props.number}`}</Text>
       </View>
-    </View>
+    </Animatable.View>
   );
 };
 

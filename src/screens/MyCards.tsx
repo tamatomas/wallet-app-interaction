@@ -8,6 +8,16 @@ import * as Animatable from "react-native-animatable";
 
 interface Props {}
 
+const scale = {
+  0: { transform: [{ scale: 0 }] },
+  1: { transform: [{ scale: 1 }] },
+};
+
+const animation = {
+  0: { transform: [{ translateX: 100 }], opacity: 0 },
+  1: { transform: [{ translateX: 0 }], opacity: 1 },
+};
+
 export const MyCards = (props: Props) => {
   return (
     <View style={styles.view}>
@@ -17,14 +27,22 @@ export const MyCards = (props: Props) => {
         />
       </SharedElement>
       <View style={{ flexDirection: "row", marginVertical: SPACING }}>
-        <Text
+        <Animatable.Text
+          animation={animation}
+          useNativeDriver
+          delay={300}
           style={{ fontSize: 28, fontFamily: "Roboto_700Bold", color: "white" }}
         >
           My Cards
-        </Text>
-        <View style={styles.plus}>
+        </Animatable.Text>
+        <Animatable.View
+          animation={scale}
+          delay={300}
+          useNativeDriver
+          style={styles.plus}
+        >
           <Feather name={"plus"} size={28} color={"black"} />
-        </View>
+        </Animatable.View>
       </View>
       <Card color={WHITE} number={"4353"} balance={"5432.20"} />
       <Card color={PINK} number={"6523"} balance={"4050.50"} />

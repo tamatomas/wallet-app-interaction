@@ -24,8 +24,10 @@ export const Main = (props: Props) => {
       </View>
       <View style={styles.meta}>
         <Text style={styles.text}>
-          Feel
-          <Text style={[styles.text, { fontWeight: "800" }]}>Special Now</Text>
+          {"Feel "}
+          <Text style={[styles.text, { fontFamily: "Roboto_500Medium" }]}>
+            Special Now
+          </Text>
         </Text>
         <Text style={styles.text}>More Often</Text>
       </View>
@@ -55,11 +57,12 @@ const styles = StyleSheet.create({
     left: -54 / 2,
   },
   text: {
-    fontSize: 32,
+    fontSize: 28,
+    fontFamily: "Roboto_400Regular",
   },
   meta: {
     position: "absolute",
-    top: width * 2,
+    bottom: SPACING * 10,
     left: SPACING * 2,
   },
 });

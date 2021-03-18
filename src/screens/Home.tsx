@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { NextButton } from "../components";
 import { height, PINK, SPACING, width } from "../styles";
@@ -34,6 +34,10 @@ const overlayAnimation = {
 };
 
 export const Home = (props: Props) => {
+  const ref = useRef<typeof AnimatablePressable>(null);
+  useEffect(() => {
+    return () => ref.current!.transition(overlayAnimation[1], overlayAnimation[0]);
+  }, []);
   return (
     <View style={styles.view}>
       <View style={styles.logo}>
@@ -130,6 +134,7 @@ export const Home = (props: Props) => {
         style={styles.overlay}
         useNativeDriver
         animation={overlayAnimation}
+        ref={ref}
         onPress={() => props.navigation.navigate("MyCards")}
       >
         <SharedElement id={"background"} style={StyleSheet.absoluteFillObject}>
